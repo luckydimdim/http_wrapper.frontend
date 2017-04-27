@@ -10,7 +10,7 @@ class HttpWrapper {
   HttpWrapper(this._http, this._authenticationService) {}
 
   Future<Response> get(url,
-      {Map<String, String> headers, useAuth = true}) async {
+      {Map<String, String> headers, useAuth: true}) async {
     if (useAuth) {
       if (!_authenticationService.isAuth()) {
         throw new UnauthorizedError();
