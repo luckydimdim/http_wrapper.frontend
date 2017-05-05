@@ -15,6 +15,7 @@ dependencies:
     browser: ^0.10.0                      # The bootstrap dart.js script for Dart apps running in the browser. https://pub.dartlang.org/packages/browser
     dart_to_js_script_rewriter: ^1.0.2    # Replaces Dart script tags with JavaScript script tags. https://pub.dartlang.org/packages/dart_to_js_script_rewriter
     resource : ^2.1.2                     # Reading resource data from (package and other) files. https://pub.dartlang.org/packages/resource
+    reflectable: ^1.0.2
     auth:
       git: http://cm-ylng-msk-04/git/auth.frontend.git
 dev_dependencies:
@@ -35,6 +36,10 @@ transformers:
         platform_pipes:
           - package:angular2/common.dart#COMMON_PIPES
         entry_points: web/main.dart
+    - reflectable:
+        entry_points:
+          - web/main.dart
+        formatted: true
     - dart_to_js_script_rewriter
     - $dart2js:
         commandLineOptions:
