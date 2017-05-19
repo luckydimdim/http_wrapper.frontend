@@ -15,10 +15,11 @@ class HttpWrapper {
       {Map<String, String> headers, useAuth: true}) async {
     _setAuth(useAuth, headers);
 
+    Response response = null;
+
     try {
-      var response = await _http.get(url, headers: headers);
-    }
-    on ClientException catch(e) {
+      response = await _http.get(url, headers: headers);
+    } on ClientException catch (e) {
       throw new ConnectionError(null, e.message);
     }
 
@@ -34,9 +35,14 @@ class HttpWrapper {
       useAuth: true}) async {
     _setAuth(useAuth, headers);
 
-    var response =
-        await _http.post(url, headers: headers, body: body, encoding: encoding);
+    Response response = null;
 
+    try {
+      response = await _http.post(url,
+          headers: headers, body: body, encoding: encoding);
+    } on ClientException catch (e) {
+      throw new ConnectionError(null, e.message);
+    }
     _checkResponse(response);
 
     return response;
@@ -49,9 +55,14 @@ class HttpWrapper {
       useAuth: true}) async {
     _setAuth(useAuth, headers);
 
-    var response =
-        await _http.put(url, headers: headers, body: body, encoding: encoding);
+    Response response = null;
 
+    try {
+      response = await _http.put(url,
+          headers: headers, body: body, encoding: encoding);
+    } on ClientException catch (e) {
+      throw new ConnectionError(null, e.message);
+    }
     _checkResponse(response);
 
     return response;
@@ -61,8 +72,13 @@ class HttpWrapper {
       {Map<String, String> headers, useAuth: true}) async {
     _setAuth(useAuth, headers);
 
-    var response = await _http.delete(url, headers: headers);
+    Response response = null;
 
+    try {
+      response = await _http.delete(url, headers: headers);
+    } on ClientException catch (e) {
+      throw new ConnectionError(null, e.message);
+    }
     _checkResponse(response);
 
     return response;
