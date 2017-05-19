@@ -15,7 +15,12 @@ class HttpWrapper {
       {Map<String, String> headers, useAuth: true}) async {
     _setAuth(useAuth, headers);
 
-    var response = await _http.get(url, headers: headers);
+    try {
+      var response = await _http.get(url, headers: headers);
+    }
+    on ClientException catch(e) {
+      throw new ConnectionError(null, e.message);
+    }
 
     _checkResponse(response);
 
