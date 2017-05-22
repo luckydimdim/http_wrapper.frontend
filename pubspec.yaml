@@ -36,6 +36,9 @@ transformers:
         platform_pipes:
           - package:angular2/common.dart#COMMON_PIPES
         entry_points: web/main.dart
+        resolved_identifiers:
+            BrowserClient: 'package:http/browser_client.dart'
+            Client: 'package:http/http.dart'
     - reflectable:
         entry_points:
           - web/main.dart
