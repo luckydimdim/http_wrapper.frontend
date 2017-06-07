@@ -84,6 +84,22 @@ class HttpWrapper {
     return response;
   }
 
+  Future<Response> sendMultipartRequest(MultipartRequest request,
+      {useAuth: true}) async {
+    _setAuth(useAuth, request.headers);
+
+    Response response = null;
+
+    try {
+      response = await Response.fromStream(await _http.send(request));
+    } on ClientException catch (e) {
+      throw new ConnectionError(null, e.message);
+    }
+    _checkResponse(response);
+
+    return response;
+  }
+
   void _setAuth(bool useAuth, Map<String, String> headers) {
     if (useAuth) {
       if (!_authenticationService.isAuth()) {
